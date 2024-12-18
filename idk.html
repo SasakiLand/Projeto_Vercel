@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Commands</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #chat {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      height: 600px;
+      overflow-y: scroll;
+      background-color: #fff;
+      transition: background-color 0.3s;
+    }
+
+    button {
+      margin-right: 10px;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #loginMessage {
+      color: green;
+    }
+
+    #currentChannel {
+      color: purple;
+      font-weight: bold;
+    }
+
+    #commandsList {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fff;
+      transition: background-color 0.3s;
+    }
+
+    #commandsList ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    #commandsList li {
+      margin-bottom: 5px;
+    }
+
+    /* Ícone do modo claro/escuro */
+    #themeToggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 24px;
+      transition: transform 0.3s;
+    }
+
+    /* Estilos para o modo escuro */
+    body.dark-mode {
+      background-color: #181818;
+      color: #f0f0f0;
+    }
+
+    #chat.dark-mode, #commandsList.dark-mode {
+      background-color: #282828;
+    }
+
+    button.dark-mode {
+      background-color: #444;
+    }
+
+    button.dark-mode:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <span id="themeToggle">☀️</span>
+  <h1>Chat Commands</h1>
+  <div id="chat"></div>
+  <p id="currentChannel">Current Channel: 0</p>
+  <input type="text" id="commandInput" placeholder="Enter command..." />
+  <button onclick="executeCommand()">Send Command</button>
+
+  <div id="commandsList">
+    <h3>Available Commands:</h3>
+    <ul>
+      <li>/canal #n - Muda para o canal especificado (de 0 a 19)</li>
+      <li>/cls - Limpa o chat</li>
+      <li>/nick @seunome - Altera seu nickname</li>
+      <li>/comandos - Exibe a lista de comandos</li>
+      <li>/cores - Altera a cor do seu nickname</li>
+      <li>/register @usuario:senha - Registra um novo usuário</li>
+      <li>/login @usuario:senha - Faz login com o usuário registrado</li>
+    </ul>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+    const chat = document.getElementById("chat");
+    const commandsList = document.getElementById("commandsList");
+    const buttons = document.querySelectorAll("button");
+
+    // Alternar modo claro/escuro
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      chat.classList.toggle("dark-mode");
+      commandsList.classList.toggle("dark-mode");
+      buttons.forEach(button => button.classList.toggle("dark-mode"));
+
+      // Alterar o ícone do botão
+      themeToggle.textContent = body.classList.contains("dark-mode") ? "🌙" : "☀️";
+      themeToggle.style.transform = "rotate(360deg)";
+      setTimeout(() => {
+        themeToggle.style.transform = "rotate(0deg)";
+      }, 300);
+    });
+  </script>
+</body>
+</html>
